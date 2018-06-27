@@ -13,6 +13,9 @@ def ui_elements_page(request):
 def chart_page(request):
     return render(request, 'form1.html')
 
+def table_ts_page(request):
+    return render(request, 'table_ts.html')
+
 def tab_panel_page(request):
     if request.method=='GET':
         print(request.GET.keys())
@@ -105,6 +108,18 @@ def input_classroom(request):
         else:
             return render(request, 'input.html')
 
+def get_table(request):
+    p_type = request.GET.get('p_type')
+    p_name = request.GET.get('p_name')
+    data1 = getData(p_type,p_name)
+    data_f = ""
+    for i in data1:
+        for j in i:
+            place = str(j)
+            data_f = data_f + place + '*'
+    print(data_f)
+    return HttpResponse(data_f)
+
 urlpatterns = [
     url(r'^$',   home_page),
     url(r'^ui-elements/$',   ui_elements_page),
@@ -114,5 +129,7 @@ urlpatterns = [
     url(r'^form/$',   form_page),
     url(r'^modify/',modify_classroom),
     url(r'^classroom_table/',show_classroom_table),
-    url(r'^input/',input_classroom)
+    url(r'^input/',input_classroom),
+    url(r'^table_ts/$',table_ts_page),
+    url(r'^get_table/',get_table)
 ]
