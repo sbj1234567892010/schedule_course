@@ -11,13 +11,38 @@ def ui_elements_page(request):
     return render(request, 'ui-elements.html')
 
 def chart_page(request):
-    return render(request, 'chart.html')
+    return render(request, 'form1.html')
 
 def tab_panel_page(request):
-    return render(request, 'tab-panel.html')
+    if request.method=='GET':
+        print(request.GET.keys())
+        if 'course_id' not in request.GET.keys():
+            return render(request,'classtablemodify.html')
+    in_list = get_class_tuple2(request,GET=True)
+    update_result = db_update_classtable(in_list)
+    if update_result:
+        return render(request,'classtablemodify.html',{'script':'alert','wrong':'修改成功'})
+    else:
+        return render(request,'classtablemodify.html',{'script':'alert','wrong':'更改失败'})
 
 def table_page(request):
-    return render(request, 'table.html')
+    classtable = get_classtable_table()
+    return render(request, 'table.html',{'classtable_list':classtable})
+
+def get_class_tuple2(request,GET=True):
+    if GET:
+        print(request.GET.keys())
+        course_id = request.GET.get('course_id', '')
+        teacher = request.GET.get('teacher', '')
+        period = request.GET.get('period','')
+        classroom = request.GET.get('classroom','')
+    else:
+        print(request.POST.keys())
+        course_id = request.GET.get('course_id', '')
+        teacher = request.GET.get('teacher', '')
+        period = request.GET.get('period', '')
+        classroom = request.GET.get('classroom', '')
+    return course_id,teacher,period,classroom
 
 
 def modify_classroom(request):

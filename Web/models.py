@@ -69,6 +69,69 @@ def get_classroom_ids():
     print('ids: ',ids)
     return ids
 
+def get_classtable_table():
+    table = []
+    for obj in Classtable.objects.all():
+        if obj.course_time_1 == 0:
+            time = "周一3,4节"
+        elif obj.course_time_1 == 1:
+            time = "周一7,8节"
+        elif obj.course_time_1 == 2:
+            time = "周二3,4节"
+        elif obj.course_time_1 == 3:
+            time = "周二7,8节"
+        elif obj.course_time_1 == 4:
+            time = "周三3,4节"
+        elif obj.course_time_1 == 5:
+            time = "周三7,8节"
+        elif obj.course_time_1 == 6:
+            time = "周四3,4节"
+        elif obj.course_time_1 == 7:
+            time = "周四7,8节"
+        elif obj.course_time_1 == 8:
+            time = "周五3,4节"
+        elif obj.course_time_1 == 9:
+            time = "周五7,8节"
+        table.append({
+            'course_id': obj.course_identity,
+            'course_name': obj.course_name,
+            'teacher_name': obj.teacher_name,
+            'period': time,
+            'classroom': obj.classroom_name_1
+        })
+    return table
+
+
+def db_update_classtable(tuple):
+    classterm = Classtable.objects.get(course_identity=tuple[0], teacher_name=tuple[1])
+    print(classterm)
+    if classterm == None:
+        return False
+    else:
+        if tuple[2] == "周一3,4节":
+            time = 0
+        elif tuple[2] == "周一7,8节":
+            time = 1
+        elif tuple[2] == "周二3,4节":
+            time = 2
+        elif tuple[2] == "周二7,8节":
+            time = 3
+        elif tuple[2] == "周三3,4节":
+            time = 4
+        elif tuple[2] == "周三7,8节":
+            time = 5
+        elif tuple[2] == "周四3,4节":
+            time = 6
+        elif tuple[2] == "周四7,8节":
+            time = 7
+        elif tuple[2] == "周五3,4节":
+            time = 8
+        elif tuple[2] == "周五7,8节":
+            time = 9
+        classterm.course_time_1 = time
+        classterm.classroom_name_1 = tuple[3]
+        classterm.save()
+        return True
 '''
     Scheduler and Database
 '''
@@ -227,4 +290,5 @@ def scheduler():
             class_table_obj.save()
         
         print(Classtable.objects.all().values())
+
 
