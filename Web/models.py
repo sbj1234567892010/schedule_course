@@ -316,6 +316,27 @@ def getData(type,name):
                 num_c.append(item[0])
                 num_t.append(item[3])
                 i = i+1
+    for item in data_2:
+        if item[3] == 0:
+            item[3] = "周一3,4节"
+        elif item[3] == 1:
+            item[3] = "周一7,8节"
+        elif item[3] == 2:
+            item[3] = "周二3,4节"
+        elif item[3] == 3:
+            item[3] = "周二7,8节"
+        elif item[3] == 4:
+            item[3] = "周三3,4节"
+        elif item[3] == 5:
+            item[3] = "周三7,8节"
+        elif item[3] == 6:
+            item[3] = "周四3,4节"
+        elif item[3] == 7:
+            item[3] = "周四7,8节"
+        elif item[3] == 8:
+            item[3] = "周五3,4节"
+        elif item[3] == 9:
+            item[3] = "周五7,8节"
     return data_2
 '''
     if str(type) == "teacher":
