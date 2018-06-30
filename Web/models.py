@@ -2,6 +2,9 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.shortcuts import render
+from django.http import HttpResponse, Http404
+from django.conf.urls import url, include
 #from django.db import connection
 import sqlite3
 
@@ -180,7 +183,7 @@ class Classtable(models.Model):
         return self.course_name
 
 
-def scheduler():
+def scheduler(request):
     class_size = len(Class.objects.all())
     classroom_size =  len(Classroom.objects.all())
     class_period = 10 # There are 2 * 5 periods for a class day
@@ -290,6 +293,7 @@ def scheduler():
             class_table_obj.save()
         
         print(Classtable.objects.all().values())
+    return render(request, 'table.html')
 
 
 '''

@@ -130,6 +130,7 @@ urlpatterns = [
     url(r'^modify/',modify_classroom),
     url(r'^classroom_table/',show_classroom_table),
     url(r'^input/',input_classroom),
+    url(r'^table/abc/',scheduler),
     url(r'^table_ts/$',table_ts_page),
     url(r'^get_table/',get_table)
 ]
