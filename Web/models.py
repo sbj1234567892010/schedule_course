@@ -184,6 +184,7 @@ class Classtable(models.Model):
 
 
 def scheduler(request):
+    Classtable.objects.all().delete()
     class_size = len(Class.objects.all())
     classroom_size =  len(Classroom.objects.all())
     class_period = 10 # There are 2 * 5 periods for a class day
