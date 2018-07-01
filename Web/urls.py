@@ -66,7 +66,7 @@ def show_classroom_table(request):
 
 def get_class_tuple(request,GET=True):
     if GET:
-        print(request.GET.keys())
+        #print(request.GET.keys())
         classroom_id = request.GET.get('classroom_id', '')
         classroom_location = request.GET.get('classroom_location', '')
         classroom_capacity = request.GET.get('classroom_capacity', '')
@@ -74,7 +74,7 @@ def get_class_tuple(request,GET=True):
         classroom_campus = request.GET.get('classroom_campus','')
         classroom_remark = request.GET.get('classroom_remark','')
     else:
-        print(request.POST.keys())
+        #print(request.POST.keys())
         classroom_id = request.POST.get('classroom_id', '')
         classroom_location = request.POST.get('classroom_location', '')
         classroom_capacity = request.POST.get('classroom_capacity', '')
@@ -117,7 +117,7 @@ def get_table(request):
         for j in i:
             place = str(j)
             data_f = data_f + place + '*'
-    print(data_f)
+    #print(data_f)
     return HttpResponse(data_f)
 
 urlpatterns = [

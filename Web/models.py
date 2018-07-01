@@ -22,12 +22,15 @@ def db_insert_classroom(id_,loc_,cap_,m_media_,camp_,remark_):
     return True
 
 def db_update_classroom(tuple):
-    print(tuple)
+    #print(tuple)
     if int(tuple[0]) not in get_classroom_ids():
         return False
     else:
-        return cur.execute('UPDATE CLASSROOM set  LOCATION = "%s", CAPACITY = %d,MULTIMEDIA = "%s",CAMPUS="%s",REMARK="%s" where id = %d'
+        if int(tuple[2]) > 0:
+            return cur.execute('UPDATE CLASSROOM set  LOCATION = "%s", CAPACITY = %d,MULTIMEDIA = "%s",CAMPUS="%s",REMARK="%s" where id = %d'
                            %(tuple[1],int(tuple[2]),tuple[3],tuple[4],tuple[5],int(tuple[0])))
+        else:
+            return cur.execute('delete from CLASSROOM where ID = %s'%int(tuple[0]))
 
 def db_delete(tuple):
     if int(tuple[0]) not in get_classroom_ids():

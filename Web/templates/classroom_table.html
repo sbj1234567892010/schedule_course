@@ -248,9 +248,6 @@
                     <li>
                         <a href="/"><i class="fa fa-dashboard"></i> Home</a>
                     </li>
-                    <li>
-                        <a href="/ui-elements"><i class="fa fa-desktop"></i> UI Elements</a>
-                    </li>
 					<li>
                         <a href="/table_ts"><i class="fa fa-bar-chart-o"></i> 教师与学生课表查询与打印</a>
                     </li>
@@ -279,10 +276,6 @@
                                 <a href="batch_in">批量导入教室信息</a>
                             </li -->
                          </ul>
-                    </li>
-
-                    <li>
-                        <a href="empty.html"><i class="fa fa-fw fa-file"></i> Empty Page</a>
                     </li>
                 </ul>
 
@@ -319,7 +312,7 @@
                                                 <th>多媒体设备情况</th>
                                                 <th>所属校区</th>
                                                 <th>备注</th>
-                                                <th>操作</th>
+                                                <!-- th>操作</th-->
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -331,11 +324,11 @@
                                                 <td>{{ item.multimedia}}</td>
                                                 <td>{{ item.campus}}</td>
                                                 <td>{{ item.remark}}</td>
-                                                <td>
+                                                <!-- td>
                                                     <form type="get">
                                                     <input type="submit" id="insert" name="delete" value="{{item.id}}" class="button" ></input>
                                                     </form>
-                                                </td>
+                                                </td -->
                                             </tr>
                                          {% endfor %}
 
