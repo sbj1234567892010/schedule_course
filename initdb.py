@@ -14,12 +14,12 @@ from Web.models import Class, Classroom, Classtable
 from Web.models import scheduler, db_insert_classroom, db_delete_all, get_classroom_info, get_classroom_table
 
 Class_name_list = ['Discrete Mathematics ', 'advanced mathematics', 'Database', 'Software Engineering',
- 'C++ programming'] * 2 #,'Java programming','C language programming', 'Python programming', 'data structure'
- #,'Artificial Intelligence', 'web development', 'Computer Architecture', 'College English'
+ 'C++ programming','Java programming','C language programming', 'Python programming', 'data structure'
+ ,'Artificial Intelligence'] #, 'web development', 'Computer Architecture', 'College English'
  #, 'Complex Analysis' ,'Computational Method','Computer Graphics'#,'computer organization' ,
  #'computer architecture' , 'Digital Image Processing']
 Classroom_name_list = ['East1A-301','West2B-203'] * 2
-teacher_name_list = ['Wang Xiaoming', 'Han meimei', 'Li Lei']
+teacher_name_list = ['Wang Xiaoming', 'Han meimei', 'Li Lei', 'Zhang San', 'Li Si']
 
 N_CLASSROOM = 4
 
@@ -97,7 +97,7 @@ def main():
     print("Init done!")
 
     i = time.time()
-    scheduler()
+    #scheduler()
     j = time.time()
     print("cost time" + str(j - i))
  

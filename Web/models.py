@@ -27,20 +27,25 @@ def db_update_classroom(tuple):
         return False
     else:
         if int(tuple[2]) > 0:
-            return cur.execute('UPDATE CLASSROOM set  LOCATION = "%s", CAPACITY = %d,MULTIMEDIA = "%s",CAMPUS="%s",REMARK="%s" where id = %d'
+            res  = cur.execute('UPDATE CLASSROOM set  LOCATION = "%s", CAPACITY = %d,MULTIMEDIA = "%s",CAMPUS="%s",REMARK="%s" where id = %d'
                            %(tuple[1],int(tuple[2]),tuple[3],tuple[4],tuple[5],int(tuple[0])))
+            connection.commit()
+            return res
         else:
-            return cur.execute('delete from CLASSROOM where ID = %s'%int(tuple[0]))
+            res =  cur.execute('delete from CLASSROOM where ID = %s'%int(tuple[0]))
+            connection.commit()
+            return res
 
 def db_delete(tuple):
     if int(tuple[0]) not in get_classroom_ids():
         return False
     else:
-        return cur.execute('delete  from CLASSROOM where  ID = %d'%int(tuple[0]))
+        res = cur.execute('delete  from CLASSROOM where  ID = %d'%int(tuple[0]))
+        connection.commit()
+        return res
 
 def db_delete_all():
     cur.execute('delete from CLASSROOM')
-
     connection.commit()
 
 # returns a list of list
@@ -48,7 +53,7 @@ def get_classroom_info():
     classroom_info = cur.execute('''
         select * from CLASSROOM 
     ''')
-    #print('class info: ',classroom_info)
+    connection.commit()
     return classroom_info
 
 #return a list of dicts
@@ -185,9 +190,21 @@ class Classtable(models.Model):
     def __str__(self):
         return self.course_name
 
+def create_classrooms():
+    Classroom.objects.all().delete()
+    classroom_info = get_classroom_table()
+    print(classroom_info)
+    i = 0
+    for class_dict in classroom_info:
+        classroom_obj = Classroom(name = class_dict['loc'])
+        classroom_obj.identity = class_dict['id']
+        classroom_obj.capacity = class_dict['cap']
+        classroom_obj.save()
+        i += 1
 
 def scheduler(request):
     Classtable.objects.all().delete()
+    create_classrooms()
     class_size = len(Class.objects.all())
     classroom_size =  len(Classroom.objects.all())
     class_period = 10 # There are 2 * 5 periods for a class day
